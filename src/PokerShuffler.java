@@ -44,13 +44,13 @@ public class PokerShuffler extends JFrame {
   // Creates the 52-card deck
   private void createDeck() {
 
-    String[] suits = { "S", "H", "D", "C" };
-    String[] values = { "A", "2", "3", "4", "5", "6", "7",
-        "8", "9", "10", "J", "Q", "K" };
+    String[] suits = { "spades", "hearts", "diamonds", "clubs" };
+    String[] values = { "ace", "2", "3", "4", "5", "6", "7",
+        "8", "9", "10", "jack", "queen", "king" };
 
     for (int i = 0; i < suits.length; i++) {
       for (int j = 0; j < values.length; j++) {
-        deck.add(values[j] + suits[i]);
+        deck.add(values[j] + "_of_" + suits[i] + ".png");
       }
     }
   }
@@ -62,7 +62,16 @@ public class PokerShuffler extends JFrame {
 
     for (int i = 0; i < deck.size(); i++) {
 
-      JLabel cardLabel = new JLabel(deck.get(i), SwingConstants.CENTER);
+      String path = "assets/" + deck.get(i);
+
+      ImageIcon originalIcon = new ImageIcon(path);
+
+      // Resize image
+      Image scaledImage = originalIcon.getImage().getScaledInstance(70, 105, Image.SCALE_SMOOTH);
+      ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+      JLabel cardLabel = new JLabel(scaledIcon);
+
       cardPanel.add(cardLabel);
     }
 
